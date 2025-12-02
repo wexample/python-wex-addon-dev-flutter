@@ -10,8 +10,9 @@ class FlutterPubspecYamlFile(YamlFile):
         self, optional: bool = False, group: str = "dev"
     ) -> dict[str, str]:
         config = self.read_config()
-        dependencies = config.search(path="dependencies", default={}).to_dict()
-        dev_dependencies = config.search(path="dev_dependencies", default={}).to_dict()
+
+        dependencies = config.search(path="dependencies").get_dict_or_default(default={})
+        dev_dependencies = config.search(path="dev_dependencies").get_dict_or_default(default={})
 
         merged = dict(dependencies)
 
