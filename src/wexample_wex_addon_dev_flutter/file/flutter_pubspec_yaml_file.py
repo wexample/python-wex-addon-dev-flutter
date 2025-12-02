@@ -1,0 +1,21 @@
+from __future__ import annotations
+
+from wexample_filestate.item.file.yaml_file import YamlFile
+from wexample_helpers.decorator.base_class import base_class
+
+
+@base_class
+class FlutterPubspecYamlFile(YamlFile):
+    def get_dependencies_versions(
+        self, optional: bool = False, group: str = "dev"
+    ) -> dict[str, str]:
+        config = self.read_config()
+        dependencies = config.search(path="dependencies", default={}).to_dict()
+        dev_dependencies = config.search(path="dev_dependencies", default={}).to_dict()
+
+        merged = dict(dependencies)
+
+        if group == "dev":
+            merged.update(dev_dependencies)
+
+        return merged
