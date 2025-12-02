@@ -1,0 +1,58 @@
+# Python artifacts
+*.egg-info
+__pycache__/
+*.py[cod]
+*.pyo
+# Build directories
+/build/
+/dist/
+/pip-wheel-metadata/
+# Virtual environments
+.env
+.venv
+venv/
+# Test and coverage artifacts
+.tox/
+.mypy_cache/
+pytest_cache/
+.coverage
+htmlcov/
+# Editor and IDE settings
+.vscode/
+.idea/
+*.swp
+*~
+.pdm-python
+.python-version
+/.idea/
+/.vscode/
+/.history/
+/*.code-workspace
+*.orig
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+.git-credentials
+.env.*
+.env.local
+.env.*.local
+*.log
+logs/
+log/
+.cache/
+cache/
+tmp/
+temp/
+build/
+dist/
+out/
+coverage/
+coverage-*.json
+coverage*.lcov
+*.pid
+*.pid.lock
+/coverage.json
