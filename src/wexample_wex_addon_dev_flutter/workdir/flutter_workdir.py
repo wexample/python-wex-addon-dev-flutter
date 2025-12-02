@@ -127,6 +127,6 @@ class FlutterWorkdir(CodeBaseWorkdir):
                     DartFormatOption.get_name(),
                 ],
             },
-            name_pattern=r"^.*\\.dart$",
+            name_pattern=r"^.*\.dart$",
             recursive=True,
         )
