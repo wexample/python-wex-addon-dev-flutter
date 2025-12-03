@@ -24,3 +24,9 @@ class FlutterPubspecYamlFile(YamlFile):
             merged.update(dev_dependencies)
 
         return merged
+
+    def dumps(self, content: dict | None = None) -> str:
+        workdir = self.get_parent_item()
+        content["name"] = workdir.get_package_name()
+
+        return super().dumps(content or {})
