@@ -107,7 +107,11 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
                         self._create_flutter_file_children_filter(),
                     ],
                 },
-
+                {
+                    "name": ".publignore",
+                    "type": DiskItemType.FILE,
+                    "should_exist": True,
+                },
             ]
         )
 
