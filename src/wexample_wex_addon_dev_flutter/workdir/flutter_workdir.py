@@ -5,7 +5,9 @@ from typing import TYPE_CHECKING
 from wexample_config.options_provider.abstract_options_provider import (
     AbstractOptionsProvider,
 )
+from wexample_helpers.decorator.base_class import base_class
 from wexample_wex_addon_app.workdir.code_base_workdir import CodeBaseWorkdir
+from wexample_wex_addon_app.workdir.mixin.with_license_workdir_mixin import WithLicenseWorkdirMixin
 
 if TYPE_CHECKING:
     from wexample_config.const.types import DictConfig
@@ -18,7 +20,8 @@ if TYPE_CHECKING:
     )
 
 
-class FlutterWorkdir(CodeBaseWorkdir):
+@base_class
+class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
     def get_app_config_file(self, reload: bool = True) -> FlutterPubspecYamlFile:
         from wexample_wex_addon_dev_flutter.file.flutter_pubspec_yaml_file import (
             FlutterPubspecYamlFile,
@@ -104,8 +107,15 @@ class FlutterWorkdir(CodeBaseWorkdir):
                         self._create_flutter_file_children_filter(),
                     ],
                 },
+                {
+                    "name": ".publignore",
+                    "type": DiskItemType.FILE,
+                    "should_exist": True,
+                },
             ]
         )
+
+        self.append_license(raw_value)
 
         return raw_value
 
@@ -130,3 +140,21 @@ class FlutterWorkdir(CodeBaseWorkdir):
             name_pattern=r"^.*\.dart$",
             recursive=True,
         )
+
+    def _safe_shell(self, cmd, cwd) -> None:
+        import subprocess
+        from wexample_helpers.helpers.shell import shell_run
+        try:
+            shell_run(cmd, inherit_stdio=True, cwd=cwd)
+        except subprocess.CalledProcessError as e:
+            if e.returncode != 65:
+                raise
+            self.warning(f"Command {cmd} returned warnings (exit code 65).")
+
+    def _publish(self, force=False) -> None:
+        cwd = self.get_path()
+
+        self._safe_shell(["flutter", "pub", "publish", "--dry-run"], cwd)
+
+        publish_cmd = ["flutter", "pub", "publish"] + (["--force"] if force else [])
+        self._safe_shell(publish_cmd, cwd)
