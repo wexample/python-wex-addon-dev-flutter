@@ -130,3 +130,25 @@ class FlutterWorkdir(CodeBaseWorkdir):
             name_pattern=r"^.*\.dart$",
             recursive=True,
         )
+
+    def _publish(self, force: bool = False) -> None:
+        from wexample_helpers.helpers.shell import shell_run
+
+        cwd = self.get_path()
+
+        shell_run(
+            ["flutter", "pub", "publish", "--dry-run"],
+            inherit_stdio=True,
+            cwd=cwd,
+        )
+
+        publish_cmd = ["flutter", "pub", "publish"]
+
+        if force:
+            publish_cmd.append("--force")
+
+        shell_run(
+            publish_cmd,
+            inherit_stdio=True,
+            cwd=cwd,
+        )
