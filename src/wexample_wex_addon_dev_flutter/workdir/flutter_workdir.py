@@ -140,25 +140,21 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
             name_pattern=r"^.*\.dart$",
             recursive=True,
         )
-
-    def _publish(self, force: bool = False) -> None:
+    
+    def _safe_shell(self, cmd, cwd):
+        import subprocess
         from wexample_helpers.helpers.shell import shell_run
+        try:
+            shell_run(cmd, inherit_stdio=True, cwd=cwd)
+        except subprocess.CalledProcessError as e:
+            if e.returncode != 65:
+                raise
+            self.warning(f"Command {cmd} returned warnings (exit code 65).")
 
+    def _publish(self, force=False):
         cwd = self.get_path()
 
-        shell_run(
-            ["flutter", "pub", "publish", "--dry-run"],
-            inherit_stdio=True,
-            cwd=cwd,
-        )
+        self._safe_shell(["flutter", "pub", "publish", "--dry-run"], cwd)
 
-        publish_cmd = ["flutter", "pub", "publish"]
-
-        if force:
-            publish_cmd.append("--force")
-
-        shell_run(
-            publish_cmd,
-            inherit_stdio=True,
-            cwd=cwd,
-        )
+        publish_cmd = ["flutter", "pub", "publish"] + (["--force"] if force else [])
+        self._safe_shell(publish_cmd, cwd)
