@@ -140,7 +140,7 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
             name_pattern=r"^.*\.dart$",
             recursive=True,
         )
-    
+
     def _safe_shell(self, cmd, cwd):
         import subprocess
         from wexample_helpers.helpers.shell import shell_run
