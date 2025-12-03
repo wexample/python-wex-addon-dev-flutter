@@ -141,7 +141,7 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
             recursive=True,
         )
 
-    def _safe_shell(self, cmd, cwd):
+    def _safe_shell(self, cmd, cwd) -> None:
         import subprocess
         from wexample_helpers.helpers.shell import shell_run
         try:
@@ -151,7 +151,7 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
                 raise
             self.warning(f"Command {cmd} returned warnings (exit code 65).")
 
-    def _publish(self, force=False):
+    def _publish(self, force=False) -> None:
         cwd = self.get_path()
 
         self._safe_shell(["flutter", "pub", "publish", "--dry-run"], cwd)

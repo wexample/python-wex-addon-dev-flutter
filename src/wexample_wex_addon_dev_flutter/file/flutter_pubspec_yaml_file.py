@@ -37,11 +37,14 @@ class FlutterPubspecYamlFile(YamlFile):
         content["version"] = workdir.get_project_version()
 
         # Get repo remote URL (fallback: origin)
-        repo_url = workdir.git_run(cmd=[
-            "remote",
-            "get-url",
-            workdir._get_deployment_remote_name() or "origin"
-        ], capture=True).stdout.strip()
+        repo_url = workdir.git_run(
+            cmd=[
+                "remote",
+                "get-url",
+                workdir._get_deployment_remote_name() or "origin",
+            ],
+            capture=True,
+        ).stdout.strip()
 
         # Auto-fill URLs if this is a GitHub repo
         if GithubRemote.is_github_repo(repo_url):
@@ -58,4 +61,3 @@ class FlutterPubspecYamlFile(YamlFile):
                 content.setdefault("issue_tracker", f"{resolved_repo_url}/issues")
 
         return super().dumps(content)
-
