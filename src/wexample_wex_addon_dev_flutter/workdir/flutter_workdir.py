@@ -7,7 +7,9 @@ from wexample_config.options_provider.abstract_options_provider import (
 )
 from wexample_helpers.decorator.base_class import base_class
 from wexample_wex_addon_app.workdir.code_base_workdir import CodeBaseWorkdir
-from wexample_wex_addon_app.workdir.mixin.with_license_workdir_mixin import WithLicenseWorkdirMixin
+from wexample_wex_addon_app.workdir.mixin.with_license_workdir_mixin import (
+    WithLicenseWorkdirMixin,
+)
 
 if TYPE_CHECKING:
     from wexample_config.const.types import DictConfig
@@ -141,16 +143,6 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
             recursive=True,
         )
 
-    def _safe_shell(self, cmd, cwd) -> None:
-        import subprocess
-        from wexample_helpers.helpers.shell import shell_run
-        try:
-            shell_run(cmd, inherit_stdio=True, cwd=cwd)
-        except subprocess.CalledProcessError as e:
-            if e.returncode != 65:
-                raise
-            self.warning(f"Command {cmd} returned warnings (exit code 65).")
-
     def _publish(self, force=False) -> None:
         cwd = self.get_path()
 
@@ -158,3 +150,15 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
 
         publish_cmd = ["flutter", "pub", "publish"] + (["--force"] if force else [])
         self._safe_shell(publish_cmd, cwd)
+
+    def _safe_shell(self, cmd, cwd) -> None:
+        import subprocess
+
+        from wexample_helpers.helpers.shell import shell_run
+
+        try:
+            shell_run(cmd, inherit_stdio=True, cwd=cwd)
+        except subprocess.CalledProcessError as e:
+            if e.returncode != 65:
+                raise
+            self.warning(f"Command {cmd} returned warnings (exit code 65).")
