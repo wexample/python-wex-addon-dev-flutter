@@ -21,7 +21,7 @@ class FlutterPackageWorkdir(FlutterWorkdir):
 
         return FlutterPackageReadmeContentConfigValue(workdir=self)
 
-    def _get_suite_package_workdir_class(self) -> type[FrameworkPackageSuiteWorkdir]:
+    def _get_suite_workdir_class(self) -> type[FrameworkPackageSuiteWorkdir]:
         from wexample_wex_addon_dev_flutter.workdir.flutter_packages_suite_workdir import (
             FlutterPackagesSuiteWorkdir,
         )
