@@ -14,6 +14,9 @@ if TYPE_CHECKING:
 
 
 class FlutterPackageWorkdir(FlutterWorkdir):
+    def _get_critical_directories(self) -> list[str]:
+        return ["lib"]
+
     def _get_readme_content(self) -> ReadmeContentConfigValue | None:
         from wexample_wex_addon_dev_flutter.config_value.flutter_package_readme_config_value import (
             FlutterPackageReadmeContentConfigValue,
