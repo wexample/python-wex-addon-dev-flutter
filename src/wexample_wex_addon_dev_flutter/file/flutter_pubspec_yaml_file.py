@@ -15,7 +15,7 @@ class FlutterPubspecYamlFile(YamlFile):
 
         # Always set the package name
         content["name"] = workdir.get_package_name()
-        content["version"] = workdir.get_project_version()
+        content["version"] = workdir.get_setup_version()
 
         # Get repo remote URL (fallback: origin)
         repo_url = workdir.git_run(
