@@ -4,4 +4,4 @@ domains: []
 global:
   name: wex_addon_dev_flutter
   type: app
-  version: 6.1.1
+  version: 6.1.2
