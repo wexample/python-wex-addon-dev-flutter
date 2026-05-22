@@ -48,11 +48,11 @@ class FlutterPubspecYamlFile(YamlFile):
     ) -> dict[str, str]:
         config = self.read_config()
 
-        dependencies = config.search(path="dependencies").get_dict_or_default(
-            default={}
-        )
-        dev_dependencies = config.search(path="dev_dependencies").get_dict_or_default(
-            default={}
+        # Use to_dict_or_none() (not get_dict_or_default) so nested ConfigValue
+        # wrappers are unwrapped to native str — matches the dict[str, str] signature.
+        dependencies = config.search(path="dependencies").to_dict_or_none() or {}
+        dev_dependencies = (
+            config.search(path="dev_dependencies").to_dict_or_none() or {}
         )
 
         merged = dict(dependencies)

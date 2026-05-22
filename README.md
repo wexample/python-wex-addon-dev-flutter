@@ -1,6 +1,6 @@
 # wex_addon_dev_flutter
 
-Version: 6.3.2
+Version: 6.4.0
 
 Python dev addon for wex
 
