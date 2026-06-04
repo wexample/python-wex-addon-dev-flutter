@@ -26,7 +26,7 @@ if TYPE_CHECKING:
 
 
 @base_class
-class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir, WithAiWorkdirMixin):
+class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdir):
     def get_app_config_file(self, reload: bool = True) -> FlutterPubspecYamlFile:
         from wexample_wex_addon_dev_flutter.file.flutter_pubspec_yaml_file import (
             FlutterPubspecYamlFile,
