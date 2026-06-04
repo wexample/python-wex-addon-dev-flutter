@@ -6,6 +6,9 @@ from wexample_config.options_provider.abstract_options_provider import (
     AbstractOptionsProvider,
 )
 from wexample_helpers.decorator.base_class import base_class
+from wexample_wex_addon_ai.workdir.mixin.with_ai_workdir_mixin import (
+    WithAiWorkdirMixin,
+)
 from wexample_wex_addon_app.workdir.code_base_workdir import CodeBaseWorkdir
 from wexample_wex_addon_app.workdir.mixin.with_license_workdir_mixin import (
     WithLicenseWorkdirMixin,
@@ -23,7 +26,7 @@ if TYPE_CHECKING:
 
 
 @base_class
-class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
+class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdir):
     def get_app_config_file(self, reload: bool = True) -> FlutterPubspecYamlFile:
         from wexample_wex_addon_dev_flutter.file.flutter_pubspec_yaml_file import (
             FlutterPubspecYamlFile,
@@ -64,6 +67,8 @@ class FlutterWorkdir(WithLicenseWorkdirMixin, CodeBaseWorkdir):
         )
 
         raw_value = super().prepare_value(raw_value=raw_value)
+
+        self.append_agents(config=raw_value)
 
         children = raw_value["children"]
 
