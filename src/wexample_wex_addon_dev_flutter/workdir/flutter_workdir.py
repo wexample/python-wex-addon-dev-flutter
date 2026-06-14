@@ -60,7 +60,6 @@ class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdi
 
     def prepare_value(self, raw_value: DictConfig | None = None) -> DictConfig:
         from wexample_filestate.const.disk import DiskItemType
-        from wexample_helpers.helpers.array import array_dict_get_by
 
         from wexample_wex_addon_dev_flutter.file.flutter_pubspec_yaml_file import (
             FlutterPubspecYamlFile,
@@ -81,19 +80,16 @@ class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdi
             }
         )
 
-        # Add common Flutter ignores
-        array_dict_get_by("name", ".gitignore", children).setdefault(
-            "should_contain_lines", []
-        ).extend(
-            [
-                ".dart_tool/",
-                "build/",
-                ".packages",
-                ".flutter-plugins",
-                ".flutter-plugins-dependencies",
-                ".flutter-plugins-android",
-                ".flutter-plugins-ios",
-            ]
+        self.add_gitignore_rules(
+            children,
+            ".dart_tool/",
+            "build/",
+            ".packages",
+            ".flutter-plugins",
+            ".flutter-plugins-dependencies",
+            ".flutter-plugins-android",
+            ".flutter-plugins-ios",
+            section="Flutter",
         )
 
         children.extend(
