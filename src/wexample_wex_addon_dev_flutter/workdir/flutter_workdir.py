@@ -50,11 +50,7 @@ class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdi
 
         options = super().get_options_providers()
 
-        options.extend(
-            [
-                FlutterOptionsProvider,
-            ]
-        )
+        options.append(FlutterOptionsProvider)
 
         return options
 
@@ -149,7 +145,9 @@ class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdi
 
         self._safe_shell(["flutter", "pub", "publish", "--dry-run"], cwd)
 
-        publish_cmd = ["flutter", "pub", "publish"] + (["--force"] if force else [])
+        publish_cmd = ["flutter", "pub", "publish"]
+        if force:
+            publish_cmd.append("--force")
         self._safe_shell(publish_cmd, cwd)
 
     def _safe_shell(self, cmd, cwd) -> None:
