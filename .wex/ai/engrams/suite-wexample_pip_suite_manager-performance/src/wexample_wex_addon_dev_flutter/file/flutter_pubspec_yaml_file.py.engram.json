@@ -1,0 +1,11 @@
+{
+  "engram_version": 1,
+  "source_key": "src/wexample_wex_addon_dev_flutter/file/flutter_pubspec_yaml_file.py",
+  "cache_nonce": "1c2800147ebc4367950bb7b61bd21d00",
+  "last_visited_at": "2026-06-17T05:42:57+00:00",
+  "last_rev": "dedfc8b69addbbd3270515331bbf7682dd4c0092",
+  "last_decision": "edit",
+  "kinds": [],
+  "notes": "deferred dev_dependencies config.search() call inside `if group == \"dev\"` to avoid unconditional lookup",
+  "in_progress": null
+}
