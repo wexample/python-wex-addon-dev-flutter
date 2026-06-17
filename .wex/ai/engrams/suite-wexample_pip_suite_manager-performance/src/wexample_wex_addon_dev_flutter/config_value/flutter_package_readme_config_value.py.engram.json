@@ -1,0 +1,11 @@
+{
+  "engram_version": 1,
+  "source_key": "src/wexample_wex_addon_dev_flutter/config_value/flutter_package_readme_config_value.py",
+  "cache_nonce": "1c2800147ebc4367950bb7b61bd21d00",
+  "last_visited_at": "2026-06-17T05:42:09+00:00",
+  "last_rev": "bf3f8fa1ad78e58c743bc842a76c663c46bac614",
+  "last_decision": "skip",
+  "kinds": [],
+  "notes": "single trivial method, no loops or repeated computation — no hot path to optimize",
+  "in_progress": null
+}
