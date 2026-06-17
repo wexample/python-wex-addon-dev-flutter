@@ -1,0 +1,11 @@
+{
+  "engram_version": 1,
+  "source_key": "src/wexample_wex_addon_dev_flutter/workdir/flutter_packages_suite_workdir.py",
+  "cache_nonce": "1c2800147ebc4367950bb7b61bd21d00",
+  "last_visited_at": "2026-06-17T05:44:12+00:00",
+  "last_rev": "6614cd20e86a4dc45e728458fd8403b0d49b2cb2",
+  "last_decision": "edit",
+  "kinds": [],
+  "notes": "removed redundant entry.is_dir() check — is_file() on the child path already returns False for non-directories, saving one syscall per call",
+  "in_progress": null
+}
