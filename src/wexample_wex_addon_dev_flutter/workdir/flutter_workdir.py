@@ -153,7 +153,7 @@ class FlutterWorkdir(WithAiWorkdirMixin, WithLicenseWorkdirMixin, CodeBaseWorkdi
     def _safe_shell(self, cmd, cwd) -> None:
         import subprocess
 
-        from wexample_helpers.helpers.shell import shell_run
+        from wexample_helpers.helper.shell import shell_run
 
         try:
             shell_run(cmd, inherit_stdio=True, cwd=cwd)
