@@ -1,6 +1,6 @@
 # wex_addon_dev_flutter
 
-Version: 6.7.3
+Version: 6.8.0
 
 Python dev addon for wex
 
@@ -83,8 +83,8 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - attrs: >=23.1.0
 - cattrs: >=23.1.0
 - wexample-filestate-flutter: >=6.6.0
-- wexample-wex-addon-ai: >=11.3.0
-- wexample-wex-addon-app: >=27.0.0
+- wexample-wex-addon-ai: >=12.0.0
+- wexample-wex-addon-app: >=28.0.0
 
 ## Versioning & Compatibility Policy
 
